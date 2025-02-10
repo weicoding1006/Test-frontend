@@ -56,6 +56,9 @@ function drawChart() {
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    //使用 <g> 元素可以讓你把所有圖表內容（例如長條、座標軸、標籤等）都包在一個群組裡面，
+    // 然後利用 transform 屬性將這個群組平移
+    // 這樣可以保證圖表的內容不會被 SVG 的邊緣、軸標籤或標題覆蓋。
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
