@@ -1,1 +1,5 @@
 @import "tailwindcss";
+input, select {
+    height: 40px; /* 可根據需要調整 */
+    line-height: 40px;
+  }

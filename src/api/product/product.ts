@@ -1,5 +1,5 @@
-import request from "../request";
-import { handleRequest } from "./apiHelper";
+import request from "../../request";
+import { handleRequest } from "../apiHelper";
 import type { CreateProduct } from "./product.interface";
 
 
