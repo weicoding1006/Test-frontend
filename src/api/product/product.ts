@@ -1,6 +1,6 @@
 import request from "../../request";
 import { handleRequest } from "../apiHelper";
-import type { CreateProduct, editProduct} from "./product.interface";
+import type { CreateProduct, EditProduct} from "./product.interface";
 
 
 export const productAPI = {
@@ -8,5 +8,5 @@ export const productAPI = {
   post: (data: CreateProduct) =>
     handleRequest(request.post("api/Product", data)),
   delete: (id: number) => handleRequest(request.delete(`api/Product/${id}`)),
-  put:(id:number,data:editProduct) => handleRequest(request.put(`api/Product/${id}`,data))
+  put:(id:number,data:EditProduct) => handleRequest(request.put(`api/Product/${id}`,data))
 };

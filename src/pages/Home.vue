@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="openAddModel"
+    @click="openAddModal"
     class="bg-blue-600 px-3 py-1 text-white rounded-md mb-2 cursor-pointer"
   >
     新增
@@ -105,9 +105,9 @@ import { storeAPI } from "@/api/store/store";
 import type {
   CreateProduct,
   CreateProductForm,
-  editProduct,
+  EditProduct,
   Product,
-  updateProductForm,
+  UpdateProductForm,
 } from "@/api/product/product.interface";
 import type { Store } from "@/api/store/store.interface";
 
@@ -123,7 +123,7 @@ let createProductData = ref<CreateProductForm>({
   storeId: "",
 });
 
-let editProductItem = ref<updateProductForm>({
+let editProductItem = ref<UpdateProductForm>({
   id: "",
   productName: "",
   price: "",
@@ -134,19 +134,17 @@ let editProductItem = ref<updateProductForm>({
 onMounted(async () => {
   productData.value = await productAPI.get();
   storeData.value = await storeAPI.get();
-  console.log(storeData.value);
 });
 
 //Function-----------------------------------------------------------
 async function handleDelete(id: number) {
   let result = confirm("是否確定移除?");
   if (result) {
-    console.log(`id:${id}`);
     await productAPI.delete(id);
     productData.value = await productAPI.get();
   }
 }
-function openAddModel() {
+function openAddModal() {
   isOpenAddModal.value = true;
 }
 
@@ -169,7 +167,6 @@ async function handleSave() {
 }
 
 function openUpdateModal(id: number) {
-  console.log(id);
   isOpenEditModal.value = true;
   let result = productData.value.find((item) => {
     return item.id == id;
@@ -182,7 +179,6 @@ function openUpdateModal(id: number) {
     price: result.price.toString(),
     storeId: result.storeId.toString(),
   };
-  console.log(editProductItem.value);
 }
 function closeEditModal() {
   isOpenEditModal.value = false;
@@ -190,7 +186,7 @@ function closeEditModal() {
 
 async function handleEdit() {
   let id = parseInt(editProductItem.value.id)
-  let requestData: editProduct = {
+  let requestData: EditProduct = {
     productName: editProductItem.value.productName,
     price: parseInt(editProductItem.value.price),
     storeId: parseInt(editProductItem.value.storeId),
